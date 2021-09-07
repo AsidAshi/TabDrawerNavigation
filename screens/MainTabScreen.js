@@ -1,23 +1,21 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { View } from 'react-native';
-
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
-
-import Icon from 'react-native-vector-icons/Ionicons';
-
-
-import ChatScreen from './ChatScreen';
-import HomeScreen from './HomeScreen';
-import ExploreScreen from './ExploreScreen';
+import Icon from 'react-native-vector-icons/Ionicons'
+import IconA from 'react-native-vector-icons/MaterialCommunityIcons';
+import AppStyles from '../AppStyles'
+import OrderScreen from './OrderScreen';
+import Dashboard from './Dashboard';
+import Tab3Screen from './Tab3Screen';
 import ProfileScreen from './ProfileScreen';
-import { Avatar } from 'react-native-paper';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 
 
-const HomeStack = createStackNavigator();
-const ChatStack = createStackNavigator();
-const ExploreStack = createStackNavigator();
+
+
+const DashboardStack = createStackNavigator();
+const OrderStack = createStackNavigator();
+const Tab3Stack = createStackNavigator();
 const ProfileStack = createStackNavigator();
 
 const Tab = createMaterialBottomTabNavigator();
@@ -25,38 +23,38 @@ const Tab = createMaterialBottomTabNavigator();
 
 const MainTabScreen = () => (
 
-    <Tab.Navigator>
+    <Tab.Navigator >
 
         <Tab.Screen
-            name="Home"
-            component={HomeStackScreen}
+            name="Dashboard"
+            component={DashboardStackScreen}
             options={{
-                tabBarLabel: 'Home',
-                tabBarColor: '#009387',
+                tabBarLabel: 'Dashboard',
+                tabBarColor: AppStyles.Color.bottomTabColor,
                 tabBarIcon: ({ color }) => (
                     <Icon name="ios-home" color={color} size={26} />
                 ),
             }}
         />
         <Tab.Screen
-            name="Chats"
-            component={ChatStackScreen}
+            name="Order"
+            component={OrderStackScreen}
             options={{
-                tabBarLabel: 'Chats',
-                tabBarColor: '#1f65ff',
+                tabBarLabel: 'Orders',
+                tabBarColor: '#009387',
                 tabBarIcon: ({ color }) => (
-                    <Icon name="md-chatboxes" color={color} size={26} />
+                    <IconA name="order-bool-descending-variant" color={color} size={26} />
                 ),
             }}
         />
         <Tab.Screen
-            name="Explore"
-            component={ExploreStackScreen}
+            name="Tab3"
+            component={Tab3StackScreen}
             options={{
-                tabBarLabel: 'Explore',
-                tabBarColor: '#d02860',
+                tabBarLabel: 'Tab3',
+                tabBarColor: '#009387',
                 tabBarIcon: ({ color }) => (
-                    <Icon name="ios-camera" color={color} size={26} />
+                    <Icon name="briefcase-sharp" color={color} size={26} />
                 ),
             }}
         />
@@ -65,7 +63,7 @@ const MainTabScreen = () => (
             component={ProfileStackScreen}
             options={{
                 tabBarLabel: 'Profile',
-                tabBarColor: '#694fad',
+                tabBarColor: '#009387',
                 tabBarIcon: ({ color }) => (
                     <Icon name="ios-person" color={color} size={26} />
                 ),
@@ -78,109 +76,35 @@ const MainTabScreen = () => (
 
 export default MainTabScreen;
 
-const HomeStackScreen = ({ navigation }) => {
+const DashboardStackScreen = ({ navigation }) => {
 
     return (
-        <HomeStack.Navigator screenOptions={{
-            headerStyle: {
-                backgroundColor: '#fff',
-                shadowColor: '#fff',
-                elevation: 0
-            },
-            headerTintColor: '#009387',
-            headerTitleStyle: {
-                fontWeight: 'bold'
-            }
-        }}>
-            <HomeStack.Screen name="Home" component={HomeScreen} options={{
-                title: 'OLX',
-                headerLeft: () => (
-                    <View style={{ marginLeft: 10 }}>
-                        <Icon.Button
-                            name="ios-menu"
-                            size={25}
-                            color="#333"
-                            backgroundColor="#fff"
-                            onPress={() => navigation.openDrawer()}
-                        />
-                    </View>
-                ),
-                headerRight: () => (
-                    <View style={{ flexDirection: 'row', marginRight: 10 }}>
-                        <Icon.Button
-                            name="ios-search"
-                            size={25}
-                            color="#333"
-                            backgroundColor="#fff"
-                            onPress={() => { }}
-                        />
-                        <TouchableOpacity style={{ paddingHorizontal: 10, marginTop: 5 }} onPress={() => { navigation.navigate('Profile') }}>
-                            <Avatar.Image
-                                source={{
-                                    uri: 'https://scontent-maa2-1.xx.fbcdn.net/v/t1.0-9/45398110_2264991620457350_8396216246802055168_o.jpg?_nc_cat=105&ccb=2&_nc_sid=09cbfe&_nc_ohc=2ZdbDhRZIEcAX9h5Lpt&_nc_ht=scontent-maa2-1.xx&oh=e0c9e2746f54d014fe9d97ffbaaa01c3&oe=5FF8F45A'
-                                }}
-                                size={30}
-                            />
-                        </TouchableOpacity>
-                    </View>
-                ),
+        <DashboardStack.Navigator>
+            <DashboardStack.Screen name='Dashboard' component={Dashboard}  options={{headerShown:false  }}  />
 
-
-            }} />
-
-        </HomeStack.Navigator>
+        </DashboardStack.Navigator>
 
     )
 }
 
-const ChatStackScreen = ({ navigation }) => {
+const OrderStackScreen = ({ navigation }) => {
     return (
 
-        <ChatStack.Navigator screenOptions={{
-            headerStyle: {
-                backgroundColor: '#1f65ff',
-            },
-            headerTintColor: '#fff',
-            headerTitleStyle: {
-                fontWeight: 'bold'
-            }
-        }}>
-            <ChatStack.Screen name="Chats" component={ChatScreen} options={{
-                headerLeft: () => (
-                    <Icon.Button name="ios-menu" size={25}
-                        backgroundColor="#1f65ff" onPress={() =>
-                            navigation.openDrawer()}></Icon.Button>
-
-                )
-            }} />
-        </ChatStack.Navigator>
+        <OrderStack.Navigator>
+            <OrderStack.Screen name='OrderScreen' component={OrderScreen} options={{headerShown:false  }} />
+        </OrderStack.Navigator>
     )
 
 }
 
 
 
-const ExploreStackScreen = ({ navigation }) => {
+const Tab3StackScreen = ({ navigation }) => {
     return (
 
-        <ExploreStack.Navigator screenOptions={{
-            headerStyle: {
-                backgroundColor: '#d02860',
-            },
-            headerTintColor: '#fff',
-            headerTitleStyle: {
-                fontWeight: 'bold'
-            }
-        }}>
-            <ExploreStack.Screen name="Explore" component={ExploreScreen} options={{
-                headerLeft: () => (
-                    <Icon.Button name="ios-menu" size={25}
-                        backgroundColor="#d02860" onPress={() =>
-                            navigation.openDrawer()}></Icon.Button>
-
-                )
-            }} />
-        </ExploreStack.Navigator>
+        <Tab3Stack.Navigator >
+            <Tab3Stack.Screen name='CRM OPERATION' component={Tab3Screen} options={{headerShown:false  }}  />
+        </Tab3Stack.Navigator>
     )
 
 }
@@ -189,23 +113,8 @@ const ExploreStackScreen = ({ navigation }) => {
 const ProfileStackScreen = ({ navigation }) => {
     return (
 
-        <ProfileStack.Navigator screenOptions={{
-            headerStyle: {
-                backgroundColor: '#694fad',
-            },
-            headerTintColor: '#fff',
-            headerTitleStyle: {
-                fontWeight: 'bold'
-            }
-        }}>
-            <ProfileStack.Screen name="Profile" component={ProfileScreen} options={{
-                headerLeft: () => (
-                    <Icon.Button name="ios-menu" size={25}
-                        backgroundColor="#694fad" onPress={() =>
-                            navigation.openDrawer()}></Icon.Button>
-
-                )
-            }} />
+        <ProfileStack.Navigator >
+            <ProfileStack.Screen name='CRM OPERATION' component={ProfileScreen} options={{headerShown:false  }} />
         </ProfileStack.Navigator>
     )
 

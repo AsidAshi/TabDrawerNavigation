@@ -1,18 +1,15 @@
 import React from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
 
-const ExploreScreen = () => {
+const Tab3Screen = () => {
     return (
         <View style={styles.container}>
-            <Text>ExploreScreen</Text>
-            <Button
-                title="click here"
-                onPress={() => alert('Button Clicked')}
-            />
+            <Text>Tab3Screen</Text>
+           
         </View>
     )
 }
-export default ExploreScreen;
+export default Tab3Screen;
 
 const styles = StyleSheet.create({
     container: {

@@ -1,7 +1,7 @@
 
-
-import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import RNExitApp from 'react-native-exit-app'
+import React, { useState } from 'react';
+import { View, StyleSheet, Modal, TouchableOpacity, Image } from 'react-native';
 import {
     DrawerContentScrollView,
     DrawerItem
@@ -11,142 +11,174 @@ import {
     Title,
     Text,
     Caption,
-    Paragraph,
     Drawer,
-    TouchableRipple,
-    Switch
 } from 'react-native-paper';
-
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import IconA from 'react-native-vector-icons/Ionicons'
+
+
 
 export function DrawerContent(props) {
 
+    const [modalVisible, setModalVisible] = useState(false);
+    
 
-    const [isDarkTheme, setIsDarkTheme] = React.useState(false);
-
-    const toggleTheme = () => {
-
-        setIsDarkTheme(!isDarkTheme)
-    }
+    
 
 
     return (
-        <View style={{ flex: 1 }}>
+        <View style={{ flex: 1, backgroundColor: '#009387' }}>
             <DrawerContentScrollView {...props}>
                 <View style={styles.drawerContent}>
                     <View style={styles.userInfoSection}>
                         <View style={{ flexDirection: 'row', marginTop: 15 }}>
-                            <Avatar.Image
+                            <TouchableOpacity onPress={() => { setModalVisible(true) }}>
+                                <Avatar.Image
 
-                                source={{
-                                    uri: 'https://scontent-maa2-1.xx.fbcdn.net/v/t1.0-9/45398110_2264991620457350_8396216246802055168_o.jpg?_nc_cat=105&ccb=2&_nc_sid=09cbfe&_nc_ohc=2ZdbDhRZIEcAX9h5Lpt&_nc_ht=scontent-maa2-1.xx&oh=e0c9e2746f54d014fe9d97ffbaaa01c3&oe=5FF8F45A'
-                                }}
-                                size={50}
+                                    source={{  }}
+                                    size={50}
 
 
-                            />
-                            <View style={{ marginLeft: 15, flexDirection: 'column' }}>
-                                <Title style={styles.title}>Ashikh P</Title>
-                                <Caption style={styles.caption}>@ashikhachuz</Caption>
+                                /></TouchableOpacity>
+                            <Modal
+                                animationType="fade"
+                                transparent={true}
+                                visible={modalVisible}>
+                                <View style={{
+                                    height: '60%',
+
+                                    marginTop: 100,
+                                    backgroundColor: '#336655',
+                                    width: '90%',
+                                    alignSelf: 'center',
+                                    backgroundColor: 'white'
+                                }}>
+                                    <View style={{flexDirection:'row',alignSelf: "flex-end",}}>
+                                        
+                                    {/* <TouchableOpacity >
+                                        <Icon name="image-edit-outline" color={'#009387'} size={35} style={{ alignSelf: "flex-end", marginRight: 10, marginTop: 10 }} />
+
+                                        </TouchableOpacity> */}
+                                        <TouchableOpacity
+
+                                            onPress={() => {
+                                                setModalVisible(!modalVisible);
+                                            }}>
+
+                                            <Icon name="close" color={'#009387'} size={35} style={{ alignSelf: "flex-end", marginRight: 10, marginTop: 10 }} />
+                                        </TouchableOpacity>
+                                    </View>
+                                    <Image source={{  }}></Image>
+                                </View>
+                            </Modal>
+                            <View style={{ marginLeft: 15, flexDirection: 'column' }} >
+                                <Title style={styles.title}>user name</Title>
+                                <Caption style={styles.caption}>user@exmple.com</Caption>
                             </View>
 
                         </View>
-                        <View style={styles.row}>
-                            <View style={styles.section}>
-                                <Paragraph style={[styles.paragraph, styles.caption]}>10k</Paragraph>
-                                <Caption style={styles.caption}>Followers</Caption>
-                            </View>
-                            <View style={styles.section}>
-                                <Paragraph style={[styles.paragraph, styles.caption]}>2000</Paragraph>
-                                <Caption style={styles.caption}>Following</Caption>
-                            </View>
 
-                        </View>
                     </View>
-                    <Drawer.Section style={styles.drawerSection}>
+                    <Drawer.Section style={styles.drawerSection}
+                    >
                         <DrawerItem
-                            icon={({ color, size }) => (
+                            icon={({ size }) => (
+
                                 <Icon
                                     name="home-outline"
-                                    color={color}
+                                    color="#fff"
                                     size={size}
                                 />
                             )}
-                            label="Home"
-                            onPress={() => { props.navigation.navigate('Home') }}
+                            activeTintColor="red"
+                            activeBackgroundColor='transparent'
+                            inactiveTintColor='black'
+                            label="Dashboard"
+                            labelStyle={{ color: 'white' }}
+                            color="#fff"
+                            onPress={() => { props.navigation.navigate('Dashboard') }}
                         />
                         <DrawerItem
-                            icon={({ color, size }) => (
+                            icon={({ size }) => (
+                                <Icon
+                                    name="order-bool-descending-variant"
+                                    color="#fff"
+                                    size={size}
+                                />
+                            )}
+                            label="Order"
+                            labelStyle={{ color: 'white' }}
+                            onPress={() => { props.navigation.navigate('Order') }}
+                        />
+                        <DrawerItem
+                            icon={({ size }) => (
                                 <Icon
                                     name="account-outline"
-                                    color={color}
+                                    color="#fff"
                                     size={size}
                                 />
                             )}
-                            label="Profile"
-                            onPress={() => { props.navigation.navigate('Profile') }}
+                            label="Tab3"
+                            labelStyle={{ color: 'white' }}
+                            onPress={() => { props.navigation.navigate('Tab3') }}
                         />
+
                         <DrawerItem
-                            icon={({ color, size }) => (
-                                <Icon
-                                    name="bookmark-outline"
-                                    color={color}
-                                    size={size}
-                                />
-                            )}
-                            label="Bookmarks"
-                            onPress={() => { props.navigation.navigate('BookmarkScreen') }}
-                        />
-                        <DrawerItem
-                            icon={({ color, size }) => (
-                                <Icon
+                            icon={({ size }) => (
+                                <IconA
                                     name="settings-outline"
-                                    color={color}
+                                    color="#fff"
                                     size={size}
                                 />
                             )}
                             label="Settings"
+                            labelStyle={{ color: 'white' }}
                             onPress={() => { props.navigation.navigate('SettingsScreen') }}
                         />
                         <DrawerItem
-                            icon={({ color, size }) => (
+                            icon={({ size }) => (
                                 <Icon
                                     name="account-check-outline"
-                                    color={color}
+                                    color="#fff"
                                     size={size}
                                 />
                             )}
                             label="Support"
+                            labelStyle={{ color: 'white' }}
                             onPress={() => { props.navigation.navigate('SupportScreen') }}
                         />
+                        <DrawerItem
+                            icon={({ size }) => (
+                                <Icon
+                                    name="bookmark-outline"
+                                    color="#fff"
+                                    size={size}
+                                />
+                            )}
+                            label="About us"
+                            labelStyle={{ color: 'white' }}
+                            onPress={() => { props.navigation.navigate('AboutUs') }}
+                        />
                     </Drawer.Section>
-                    <Drawer.Section title="preferences">
-                        <TouchableRipple onPress={() => { toggleTheme() }}>
-                            <View style={styles.preference}>
-                                <Text>Dark Theme</Text>
-                                <View pointerEvents='none'>
-                                    <Switch value={isDarkTheme} />
-                                </View>
-                            </View>
-                        </TouchableRipple>
 
-                    </Drawer.Section>
+
                 </View>
 
             </DrawerContentScrollView>
             <Drawer.Section style={styles.bottomDrawerSection}>
+            <TouchableOpacity onpress ={()=> RNExitApp.exitApp()}>
                 <DrawerItem
-                    icon={({ color, size }) => (
+                    icon={({ size }) => (
                         <Icon
                             name="exit-to-app"
-                            color={color}
+                            color="#fff"
                             size={size}
                         />
                     )}
-                    label="Sign Out"
-                    onPress={() => { }}
-                />
-
+                    label="Log Out"
+                    labelStyle={{ color: 'white' }}
+                    
+                /></TouchableOpacity>
             </Drawer.Section>
         </View>
     )
@@ -158,6 +190,8 @@ const styles = StyleSheet.create({
     },
     userInfoSection: {
         paddingLeft: 20,
+        height: 70,
+        backgroundColor: '#fff'
     },
     title: {
         fontSize: 16,
@@ -187,13 +221,9 @@ const styles = StyleSheet.create({
     },
     bottomDrawerSection: {
         marginBottom: 15,
+        color: "#fff",
         borderTopColor: '#f4f4f4',
         borderTopWidth: 1
     },
-    preference: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        paddingVertical: 12,
-        paddingHorizontal: 16,
-    },
-});
+
+})
